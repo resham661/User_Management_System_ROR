@@ -1,0 +1,214 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+- bearerAuth: []
+paths:
+  "/auth/login":
+    post:
+      summary: login authentication
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+  "/roles":
+    get:
+      summary: list roles
+      tags:
+      - Role
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create role
+      tags:
+      - Role
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role_name:
+                  type: string
+              required:
+              - role_name
+  "/roles/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show role
+      tags:
+      - Role
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete role
+      tags:
+      - Role
+      responses:
+        '200':
+          description: successful
+  "/users":
+    get:
+      summary: list users
+      tags:
+      - User
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create user
+      tags:
+      - User
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                full_name:
+                  type: string
+                email:
+                  type: string
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+              - full_name
+              - username
+              - email
+              - password
+  "/users/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show user
+      tags:
+      - User
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: edit user
+      tags:
+      - User
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                full_name:
+                  type: string
+                email:
+                  type: string
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+              - full_name
+              - username
+              - email
+              - password
+    delete:
+      summary: delete user
+      tags:
+      - User
+      responses:
+        '200':
+          description: successful
+  "/users/deactive/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    put:
+      summary: deactive user
+      tags:
+      - User
+      responses:
+        '200':
+          description: successful
+  "/users/{user_id}/roles/{role_id}":
+    parameters:
+    - name: user_id
+      in: path
+      description: user_id
+      required: true
+      schema:
+        type: string
+    - name: role_id
+      in: path
+      description: role_id
+      required: true
+      schema:
+        type: string
+    post:
+      summary: role_assign user
+      tags:
+      - User_Role
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: remove_role user
+      tags:
+      - User_Role
+      responses:
+        '200':
+          description: successful
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000

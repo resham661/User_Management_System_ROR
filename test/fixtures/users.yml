@@ -1,0 +1,16 @@
+
+teacher_user:
+  full_name: Sireesh
+  email: 123@gmail.com
+  username: Sire911
+  password: password
+  # password: <%= BCrypt::Password.create('password') %>
+  # role: 'teacher'
+
+
+student_user:
+  full_name: Savan
+  email: 234@gmail.com
+  username: Sav101
+  password: password
+  # role: 'student'
